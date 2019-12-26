@@ -1,0 +1,130 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+#map { height: 100%; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#origin-input,
+#destination-input {
+  background-color: $white;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 200px;
+}
+
+#origin-input:focus,
+#destination-input:focus {
+  border-color: $blue;
+}
+
+#mode-selector {
+  color: $white;
+  background-color: $blue;
+  margin-left: 12px;
+  padding: 5px 11px 0 11px;
+}
+
+#mode-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.weight {
+  z-index: 8;
+  position: absolute;
+  top: 50px;
+  left: 12px;
+  width: 412px;
+  min-height: 72px;
+  background: $white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.d-flex {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}
+
+.visually_hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.panel_name {
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.15;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0 auto;
+  display: block;
+}
+
+.panel_list {
+  list-style: none;
+  border-bottom: 1px solid $cyan;
+  padding: 0;
+  padding-bottom: 12px;
+}
+
+.panel_list label{
+  display: block;
+  margin: 0 30px;
+  cursor: pointer;
+}
+
+
+
+.panel_list label:hover .panel_name,
+.panel_list input:checked + .panel_name {
+  color: $red;
+}
+
+.panel_list li:last-of-type {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.block-inform {
+  padding: 0 20px;
+  display: none;
+}
