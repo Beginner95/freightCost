@@ -24,5 +24,5 @@
     </div>
 
     <div id="map"></div>
-    <script src="https://maps.googleapis.com/maps/api/js?key{{ env('YOUR_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('YOUR_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
 @endsection
