@@ -126,3 +126,14 @@ function qS(el) {
 function moneyFormat(n) {
     return parseFloat(n).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1 ");
 }
+
+let clear_input_a = qS('#clear-input-a');
+let clear_input_b = qS('#clear-input-b');
+
+clear_input_a.addEventListener('click', clearInput);
+clear_input_b.addEventListener('click', clearInput);
+
+function clearInput(e) {
+    if (e.target.id === 'clear-input-a') qS('#origin-input').value = '';
+    if (e.target.id === 'clear-input-b') qS('#destination-input').value = '';
+}

@@ -5,6 +5,8 @@
         <input id="origin-input" class="controls" type="text" placeholder="Город погрузки">
         <input id="destination-input" class="controls" type="text" placeholder="Город выгрузки">
     </div>
+    <div class="clear-input" id="clear-input-a"></div>
+    <div class="clear-input" id="clear-input-b"></div>
     <div class="weight">
         <ul class="panel_list d-flex">
             @foreach ($weights as $key => $weight)

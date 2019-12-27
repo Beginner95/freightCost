@@ -134,3 +134,23 @@ html, body {
   float: right;
   padding: 0 7px;
 }
+
+.clear-input{
+  width: 25px;
+  height: 25px;
+  background: url('/img/clear_input.png') center center no-repeat;
+  position: absolute;
+  cursor: pointer;
+  right: 8px;
+  padding-top: 0;
+  z-index: 999;
+  top: 14px;
+}
+
+#clear-input-a {
+  left: 185px;
+}
+
+#clear-input-b {
+  left: 398px;
+}
