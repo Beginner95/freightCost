@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">Добавление нового транспорта</div>
                     <div class="card-body">
-                        {{ Form::open(['route' => 'admin.index.store', 'method' => 'post']) }}
+                        {{ Form::open(['route' => 'admin.car.store', 'method' => 'post']) }}
                         <div class="form-group">
                             <label for="name">Грузоподъемность</label>
                             <input type="text" name="name" value="" class="form-control" required>

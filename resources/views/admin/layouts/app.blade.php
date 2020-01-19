@@ -44,18 +44,19 @@
 
                         @else
                             <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Города</a>
-
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Город</a>
                                 <div class="dropdown-menu dropdown-menu-left">
                                     <a class="dropdown-item" href="{{ route('admin.city.index') }}">Список городов</a>
                                     <a class="dropdown-item" href="{{ route('admin.city.create') }}">Добавить город</a>
                                 </div>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.index.index') }}" class="nav-link">Список транспортов</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.index.create') }}" class="nav-link">Добавить транспорт</a>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Транспорт</a>
+                                <div class="dropdown-menu dropdown-menu-left">
+                                    <a href="{{ route('admin.car.index') }}" class="dropdown-item">Список транспортов</a>
+                                    <a href="{{ route('admin.car.create') }}" class="dropdown-item">Добавить транспорт</a>
+                                </div>
+
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

@@ -6,7 +6,7 @@ use App\Weight;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class IndexController extends Controller
+class CarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class IndexController extends Controller
     public function index()
     {
         $weight = Weight::get();
-        return view('admin.index', ['weights' => $weight]);
+        return view('admin.car.index', ['weights' => $weight]);
     }
 
     /**
@@ -26,7 +26,7 @@ class IndexController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        return view('admin.car.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class IndexController extends Controller
         $weight->cubic_meter = $cubic_meter;
         $weight->price = $price;
         $weight->save();
-        return redirect('/admin/index');
+        return redirect('/admin/car');
     }
 
     /**
@@ -70,7 +70,7 @@ class IndexController extends Controller
     public function edit($id)
     {
         $weight = Weight::where('id', $id)->first();
-        return view('admin.edit', ['weight' => $weight]);
+        return view('admin.car.edit', ['weight' => $weight]);
     }
 
     /**
@@ -88,7 +88,7 @@ class IndexController extends Controller
 
         if (empty($name) || empty($cubic_meter)) return back();
         Weight::where('id', $id)->update(['name' => $name, 'cubic_meter' => $cubic_meter, 'price' => $price]);
-        return redirect('admin/index');
+        return redirect('admin/car');
     }
 
     /**

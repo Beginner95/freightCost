@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Список транспортов <a href="{{ route('admin.index.create') }}" class="btn btn-primary add-weight" title="Добавить транспорт"><span>+</span></a></div>
+                    <div class="card-header">Список транспортов <a href="{{ route('admin.car.create') }}" class="btn btn-primary add-weight" title="Добавить транспорт"><span>+</span></a></div>
                     <div class="card-body">
                         @if (empty($weights->toArray()))
                             В базе нет транспорта!
@@ -29,8 +29,8 @@
                                         <td>{{ $weight->cubic_meter }}</td>
                                         <td>{{ $weight->price }}</td>
                                         <td width="150">
-                                            <a href="{{ route('admin.index.edit', $weight->id) }}" class="btn btn-success">Edit</a>
-                                            {{ Form::open(['route' => ['admin.index.destroy', $weight->id], 'style' => 'float:right;']) }}
+                                            <a href="{{ route('admin.car.edit', $weight->id) }}" class="btn btn-success">Edit</a>
+                                            {{ Form::open(['route' => ['admin.car.destroy', $weight->id], 'style' => 'float:right;']) }}
                                                 {{ Form::hidden('_method', 'DELETE') }}
                                                 {{ Form::submit('Delete', ['class' => 'btn btn-danger', 'onclick' => 'return confirm(\'Удалить транспорт?\');']) }}
 
