@@ -43,6 +43,14 @@
 
 
                         @else
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Города</a>
+
+                                <div class="dropdown-menu dropdown-menu-left">
+                                    <a class="dropdown-item" href="{{ route('admin.city.index') }}">Список городов</a>
+                                    <a class="dropdown-item" href="{{ route('admin.city.create') }}">Добавить город</a>
+                                </div>
+                            </li>
                             <li class="nav-item">
                                 <a href="{{ route('admin.index.index') }}" class="nav-link">Список транспортов</a>
                             </li>

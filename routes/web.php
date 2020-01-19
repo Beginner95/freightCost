@@ -15,4 +15,5 @@ Route::group(['namespace' => 'Auth'], function() {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::resource('index', 'IndexController');
+    Route::resource('city', 'CityController');
 });
