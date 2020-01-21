@@ -39,8 +39,7 @@ class CarController extends Controller
     {
         $name = $request['name'];
         $cubic_meter = $request['cubic-meter'];
-        $price = $request['price'];
-        if (empty($name) || empty($price)) return back();
+        if (empty($name)) return back();
 
         $weight = new Weight();
         $weight->name = $name;
@@ -85,7 +84,7 @@ class CarController extends Controller
         $cubic_meter= $request['cubic-meter'];
 
         if (empty($name) || empty($cubic_meter)) return back();
-        Weight::where('id', $id)->update(['name' => $name, 'cubic_meter' => $cubic_meter, 'price' => $price]);
+        Weight::where('id', $id)->update(['name' => $name, 'cubic_meter' => $cubic_meter]);
         return redirect('admin/car');
     }
 
