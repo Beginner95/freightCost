@@ -1,11 +1,5 @@
-
-// This example requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script
-// src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
 function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
+    const map = new google.maps.Map(document.getElementById('map'), {
         mapTypeControl: false,
         center: {lat: 55.751770, lng: 37.608868},
         zoom: 7
@@ -25,16 +19,14 @@ function AutocompleteDirectionsHandler(map) {
     this.directionsRenderer = new google.maps.DirectionsRenderer;
     this.directionsRenderer.setMap(map);
 
-    var originInput = document.getElementById('origin-input');
-    var destinationInput = document.getElementById('destination-input');
-    var modeSelector = document.getElementById('mode-selector');
-
-    var originAutocomplete = new google.maps.places.Autocomplete(originInput);
+    const originInput = document.getElementById('origin-input');
+    const destinationInput = document.getElementById('destination-input');
+    const modeSelector = document.getElementById('mode-selector');
+    const originAutocomplete = new google.maps.places.Autocomplete(originInput);
     // Specify just the place data fields that you need.
     originAutocomplete.setFields(['place_id']);
 
-    var destinationAutocomplete =
-        new google.maps.places.Autocomplete(destinationInput);
+    const destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput);
     // Specify just the place data fields that you need.
     destinationAutocomplete.setFields(['place_id']);
 
@@ -46,16 +38,11 @@ function AutocompleteDirectionsHandler(map) {
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
 }
 
-// Sets a listener on a radio button to change the filter type on Places
-// Autocomplete.
-
-
 AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
-    var me = this;
+    const me = this;
     autocomplete.bindTo('bounds', this.map);
-
     autocomplete.addListener('place_changed', function() {
-        var place = autocomplete.getPlace();
+        const place = autocomplete.getPlace();
 
         if (!place.place_id) {
             window.alert('Please select an option from the dropdown list.');
@@ -70,18 +57,16 @@ AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(aut
     });
 };
 
-let distance = qS('input[name="distance"]');
 let panel = qS('.panel_list');
 let text_distance = qS('.text-distance');
 let text_price = qS('.text-price');
-let result_block = qS('.block-inform');
-let check_price = qS('input[name="w"]:checked');
+let result_block = qS('.weight');
 
 AutocompleteDirectionsHandler.prototype.route = function() {
     if (!this.originPlaceId || !this.destinationPlaceId) {
         return;
     }
-    var me = this;
+    const me = this;
     this.directionsService.route(
         {
             origin: {'placeId': this.originPlaceId},
@@ -92,9 +77,14 @@ AutocompleteDirectionsHandler.prototype.route = function() {
         function(response, status) {
             if (status === 'OK') {
                 me.directionsRenderer.setDirections(response);
-                distance.value = response.routes[0].legs[0].distance.value;
                 text_distance.innerText = response.routes[0].legs[0].distance.text;
-                calc(distance.value, check_price.value);
+                let start_address = response.routes[0].legs[0].start_address;
+                let end_address = response.routes[0].legs[0].end_address;
+                let addresses = {
+                    'start_address': start_address,
+                    'end_address': end_address
+                };
+                ajax('/weights', addresses);
             } else {
                 window.alert('Directions request failed due to ' + status);
             }
@@ -103,18 +93,15 @@ AutocompleteDirectionsHandler.prototype.route = function() {
 
 function runCalc(e) {
     if (e.target.tagName === 'INPUT') {
-        let dist = distance.value;
         let price = e.target.value;
-        calc(dist, price);
+        calc(price);
     }
 }
 
-function calc(distance, price) {
-    let dist = (distance / 1000);
-    let result = price * dist;
+function calc(price) {
     result_block.style.display = 'block';
-    text_price.innerText = moneyFormat(result);
-    return result;
+    text_price.innerText = moneyFormat(price);
+    return price;
 }
 
 panel.addEventListener('click', runCalc);
@@ -136,4 +123,43 @@ clear_input_b.addEventListener('click', clearInput);
 function clearInput(e) {
     if (e.target.id === 'clear-input-a') qS('#origin-input').value = '';
     if (e.target.id === 'clear-input-b') qS('#destination-input').value = '';
+}
+
+function ajax(url, data) {
+    fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    }).then(data => data.text())
+        .then(data => {
+            createBlockWeights(data);
+        });
+}
+
+function createBlockWeights(data) {
+    let html = '';
+    let block = qS('.block-weight');
+    data = JSON.parse(data);
+    if (data.route === null) {
+        block.innerHTML = '';
+        result_block.style.display = 'block';
+        text_price.innerText = 'Такого маршрута нет'
+    } else {
+        for (let i in data) {
+            let checked = '';
+            if (i === '0') checked = 'checked';
+            html += '<li><label><input type="radio" name="w" value="' + data[i].price + '" data-price="" ' + checked + ' class="visually_hidden">';
+            html += '<span class="panel_name">' + data[i].name + ' <br> ' + data[i].cubic_meter + '</span></label></li>';
+        }
+        block.innerHTML = html;
+        let check_price = qS('input[name="w"]:checked');
+        calc(check_price.value);
+    }
+}
+
+function c(el) {
+    console.log(el);
 }

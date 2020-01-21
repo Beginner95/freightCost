@@ -8,17 +8,7 @@
     <div class="clear-input" id="clear-input-a"></div>
     <div class="clear-input" id="clear-input-b"></div>
     <div class="weight">
-        <ul class="panel_list d-flex">
-            @foreach ($weights as $key => $weight)
-                <li>
-                    <label>
-                        <input type="radio" name="w" value="{{ $weight->price }}" data-price="" @if ($key === 0) checked="checked" @endif class="visually_hidden">
-                        <span class="panel_name">{{ $weight->name }}<br>{{ $weight->cubic_meter }}</span>
-                    </label>
-                </li>
-            @endforeach
-            <input type="hidden" name="distance" value="0">
-        </ul>
+        <ul class="panel_list d-flex block-weight"></ul>
         <div class="block-inform">
             <p>Растояние: <span class="text-distance"></span></p>
             <p>Цена перевозки: <span class="text-price"></span></p>
