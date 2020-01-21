@@ -16,7 +16,6 @@
                                     <th scope="col">№</th>
                                     <th scope="col">Грузоподъемность</th>
                                     <th scope="col">Габарит</th>
-                                    <th scope="col">Цена</th>
                                     <th scope="col">Действие</th>
                                 </tr>
                             </thead>
@@ -27,7 +26,6 @@
                                         <th width="30" scope="row">{{ $i++ }}</th>
                                         <td>{{ $weight->name }}</td>
                                         <td>{{ $weight->cubic_meter }}</td>
-                                        <td>{{ $weight->price }}</td>
                                         <td width="150">
                                             <a href="{{ route('admin.car.edit', $weight->id) }}" class="btn btn-success">Edit</a>
                                             {{ Form::open(['route' => ['admin.car.destroy', $weight->id], 'style' => 'float:right;']) }}

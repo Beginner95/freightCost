@@ -17,7 +17,6 @@ class CreateWeightsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 200);
             $table->string('cubic_meter', 200)->nullable();
-            $table->double('price', 8, 2);
             $table->timestamps();
         });
     }

@@ -16,10 +16,6 @@
                             <label for="cubic">Габариты</label>
                             <input type="text" name="cubic-meter" value="" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <label for="price">Цена</label>
-                            <input type="text" name="price" value="" class="form-control" required>
-                        </div>
                         <button type="submit" class="btn btn-primary">Добавить</button>
                         {{ Form::close() }}
                     </div>
