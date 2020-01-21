@@ -11,6 +11,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js" defer></script>
+    <script src="{{ asset('js/admin_main.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -44,6 +48,13 @@
 
                         @else
                             <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Маршрут</a>
+                                <div class="dropdown-menu dropdown-menu-left">
+                                    <a href="{{ route('admin.route.index') }}" class="dropdown-item">Список маршрутов</a>
+                                    <a href="{{ route('admin.route.create') }}" class="dropdown-item">Добавить маршрут</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Город</a>
                                 <div class="dropdown-menu dropdown-menu-left">
                                     <a class="dropdown-item" href="{{ route('admin.city.index') }}">Список городов</a>
@@ -56,7 +67,6 @@
                                     <a href="{{ route('admin.car.index') }}" class="dropdown-item">Список транспортов</a>
                                     <a href="{{ route('admin.car.create') }}" class="dropdown-item">Добавить транспорт</a>
                                 </div>
-
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

@@ -16,4 +16,6 @@ Route::group(['namespace' => 'Auth'], function() {
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::resource('car', 'CarController');
     Route::resource('city', 'CityController');
+    Route::get('route/autocomplete', 'RouteController@autocomplete')->name('route.autocomplete');
+    Route::resource('route', 'RouteController');
 });
