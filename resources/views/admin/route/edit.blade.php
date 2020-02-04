@@ -39,14 +39,13 @@
                                         </div>
                                         <div class="col">
                                             <label for="price">Цена</label>
-                                            <input type="text" name="price[]" class="form-control" value="{{ $weight->pivot->price }}">
+                                            <input type="text" name="price[]" class="form-control" value="{{ $weight->pivot->price }}" required="required" maxlength="6" minlength="1" style="width: 89%;">
                                         </div>
                                     </div>
                                     @if ($key > 0)
                                         <div class="row">
                                             <div class="col">
-                                                <label for=""></label>
-                                                <span class="btn btn-danger float-right remove-weight-block">x</span>
+                                                <span class="btn btn-danger float-right remove-weight-block" style="position:absolute; right:15px; top:-37px;">x</span>
                                             </div>
                                         </div>
                                     @endif

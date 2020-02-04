@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="col">
                                     <label for="price">Цена</label>
-                                    <input type="text" name="price[]" class="form-control">
+                                    <input type="text" name="price[]" class="form-control" required="required" maxlength="6" minlength="1" style="width: 89%;">
                                 </div>
                             </div>
 

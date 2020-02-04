@@ -46,7 +46,7 @@ class RouteController extends Controller
         $prices = $request['price'];
         $distance = $request['distance'];
 
-        if (empty($origin_id) || empty($destination_id)) return back();
+        if (empty($origin_id) || empty($destination_id) || empty($distance)) return back();
 
         $sync_data = $this->getSyncData($weights, $prices, $distance);
         $id = $this->saveRoute($origin_id, $destination_id);

@@ -74,7 +74,7 @@ AutocompleteDirectionsHandler.prototype.route = function() {
         function(response, status) {
             if (status === 'OK') {
                 me.directionsRenderer.setDirections(response);
-                text_distance.value = response.routes[0].legs[0].distance.text;
+                text_distance.value = (response.routes[0].legs[0].distance.text);
             } else {
                 window.alert('Directions request failed due to ' + status);
             }
@@ -94,7 +94,10 @@ $('input.typeahead').typeahead({
 });
 
 const weight_block = qS('.block-weight');
-weight_block.addEventListener('click', blockWeight);
+if (weight_block !== null) {
+    weight_block.addEventListener('click', blockWeight);
+}
+
 
 function blockWeight(e) {
     if (e.target.classList.contains('remove-weight-block')) {
@@ -122,13 +125,12 @@ function addWeightPrice() {
             </div>
             <div class="col">
                 <label for="price">Цена</label>
-                <input type="text" name="price[]" class="form-control">
+                <input type="text" name="price[]" class="form-control" required="required" maxlength="6" minlength="1" style="width: 89%;">
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <label for=""></label>
-                <span class="btn btn-danger float-right remove-weight-block">x</span>
+                <span class="btn btn-danger float-right remove-weight-block" style="position:absolute; right:15px; top:-37px;">x</span>
             </div>
         </div>
     `;
