@@ -16,6 +16,7 @@ class CreateRouteToWeightTable extends Migration
         Schema::create('route_weight', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->double('price', 8, 2);
+            $table->string('distance', 100)->nullable();
             $table->bigInteger('route_id')->unsigned();
             $table->bigInteger('weight_id')->unsigned();
             $table->foreign('route_id')->references('id')->on('routes')->onDelete('cascade');
