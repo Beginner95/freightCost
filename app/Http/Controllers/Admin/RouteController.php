@@ -160,7 +160,15 @@ class RouteController extends Controller
 
     private function getCityId($city)
     {
-        $city = City::select('id')->where('name', $city)->first();
+        $cityName = explode(',', $city)[0];
+        $city = City::select('id')->where('name', $cityName)->first();
+        if (empty($city)) {
+            $city = new City();
+            $city->name = $cityName;
+            $city->region_id = 0;
+            $city->save();
+            return $city->id;
+        }
         return $city->id;
     }
 }

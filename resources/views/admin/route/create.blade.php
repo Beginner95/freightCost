@@ -12,15 +12,16 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="origin">Из города</label>
-                                    <input type="text" name="origin" class="typeahead form-control" required autocomplete="off">
+                                    <input type="text" id="origin-input" name="origin" class="typeahead form-control" style="width: 100%; margin: 0;" required autocomplete="off">
                                 </div>
                                 <div class="col">
                                     <label for="destination">В город</label>
-                                    <input type="text" name="destination" value="" class="typeahead form-control" required autocomplete="off">
+                                    <input type="text" id="destination-input" name="destination" value="" class="typeahead form-control" style="width: 100%; margin: 0;" required autocomplete="off">
                                 </div>
                             </div>
 
                         </div>
+                        <div id="map"></div>
                         <div class="form-group weight-price">
                             <div class="row">
                                 <div class="col">
@@ -30,6 +31,10 @@
                                             <option value="{{ $weight->id }}">{{ $weight->name }} / {{ $weight->cubic_meter }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="col">
+                                    <label for="distance">Дистанция км</label>
+                                    <input type="text" id="distance" name="distance[]" class="form-control">
                                 </div>
                                 <div class="col">
                                     <label for="price">Цена</label>
