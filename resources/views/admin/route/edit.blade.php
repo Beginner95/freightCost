@@ -34,6 +34,10 @@
                                             </select>
                                         </div>
                                         <div class="col">
+                                            <label for="distance">Дистанция км</label>
+                                            <input type="text" id="distance" name="distance[]" class="form-control" value="{{ preg_replace('!\s++!u', ' ', $weight->pivot->distance) }} ">
+                                        </div>
+                                        <div class="col">
                                             <label for="price">Цена</label>
                                             <input type="text" name="price[]" class="form-control" value="{{ $weight->pivot->price }}">
                                         </div>

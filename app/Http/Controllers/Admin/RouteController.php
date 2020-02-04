@@ -44,10 +44,11 @@ class RouteController extends Controller
         $destination_id = $this->getCityId($request['destination']);
         $weights = $request['weight'];
         $prices = $request['price'];
+        $distance = $request['distance'];
 
         if (empty($origin_id) || empty($destination_id)) return back();
 
-        $sync_data = $this->getSyncData($weights, $prices);
+        $sync_data = $this->getSyncData($weights, $prices, $distance);
         $id = $this->saveRoute($origin_id, $destination_id);
 
         $route = Route::where('id', $id)->first();
@@ -97,10 +98,11 @@ class RouteController extends Controller
         $destination_id = $this->getCityId($request['destination']);
         $weights = $request['weight'];
         $prices = $request['price'];
+        $distance = $request['distance'];
 
         if (empty($origin_id) || empty($destination_id)) return back();
 
-        $sync_data = $this->getSyncData($weights, $prices);
+        $sync_data = $this->getSyncData($weights, $prices, $distance);
         $id = $this->saveRoute($origin_id, $destination_id);
 
         $route = Route::where('id', $id)->first();
@@ -132,7 +134,7 @@ class RouteController extends Controller
         return $route->id;
     }
 
-    private function getSyncData($weights, $prices)
+    private function getSyncData($weights, $prices, $distance)
     {
         $i = 0;
         $sync_data = [];
@@ -140,6 +142,7 @@ class RouteController extends Controller
             $sync_data[] = [
                 'weight_id' => $weight,
                 'price' => $prices[$i],
+                'distance' => $distance[$i]
             ];
             $i++;
         }

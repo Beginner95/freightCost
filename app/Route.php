@@ -8,7 +8,7 @@ class Route extends Model
 {
     public function weights()
     {
-        return $this->belongsToMany(Weight::class)->withPivot('price')->withTimestamps();
+        return $this->belongsToMany(Weight::class)->withPivot('price', 'distance')->withTimestamps();
     }
 
     public function cityOrigin()

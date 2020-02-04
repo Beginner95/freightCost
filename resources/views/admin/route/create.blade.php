@@ -12,11 +12,11 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="origin">Из города</label>
-                                    <input type="text" id="origin-input" name="origin" class="typeahead form-control" style="width: 100%; margin: 0;" required autocomplete="off">
+                                    <input type="text" id="origin-input" name="origin" class="form-control" style="width: 100%; margin: 0;" required autocomplete="off">
                                 </div>
                                 <div class="col">
                                     <label for="destination">В город</label>
-                                    <input type="text" id="destination-input" name="destination" value="" class="typeahead form-control" style="width: 100%; margin: 0;" required autocomplete="off">
+                                    <input type="text" id="destination-input" name="destination" value="" class="form-control" style="width: 100%; margin: 0;" required autocomplete="off">
                                 </div>
                             </div>
 
@@ -33,7 +33,7 @@
                                     </select>
                                 </div>
                                 <div class="col">
-                                    <label for="distance">Дистанция км</label>
+                                    <label for="distance">Дистанция</label>
                                     <input type="text" id="distance" name="distance[]" class="form-control">
                                 </div>
                                 <div class="col">

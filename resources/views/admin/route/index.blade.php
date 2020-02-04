@@ -16,6 +16,7 @@
                                         <th scope="col">№</th>
                                         <th scope="col">Из города</th>
                                         <th scope="col">В город</th>
+                                        <th scope="col">Расстояние</th>
                                         <th scope="col">Вес / Цена</th>
                                         <th scope="col">Действие</th>
                                     </tr>
@@ -27,6 +28,7 @@
                                         <td width="30" scope="row">{{ $i++ }}</td>
                                         <td width="150">{{ $route->cityOrigin->name }}</td>
                                         <td width="150">{{ $route->cityDestination->name }}</td>
+                                        <td width="150">{{ $route->weights[0]->pivot->distance }}</td>
                                         <td>
                                             @foreach($route->weights as $weight)
                                                 {{ $weight->name }} / {{ $weight->pivot->price }} <br>
