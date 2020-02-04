@@ -15,7 +15,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js" defer></script>
     <script src="{{ asset('js/admin_main.js') }}" defer></script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('YOUR_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
