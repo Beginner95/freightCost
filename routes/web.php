@@ -14,10 +14,16 @@ Route::group(['namespace' => 'Auth'], function() {
     Route::get('logout', 'LoginController@logout')->name('logout');
 });
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
+Route::group([
+        'prefix' => 'admin',
+        'as' => 'admin.',
+        'namespace' => 'Admin',
+        'middleware' => ['auth', 'can:administrator']
+    ], function () {
     Route::get('/', 'IndexController@index')->name('index');
     Route::resource('car', 'CarController');
     Route::resource('city', 'CityController');
     Route::get('route/autocomplete', 'RouteController@autocomplete')->name('route.autocomplete');
     Route::resource('route', 'RouteController');
+    Route::resource('/manager', 'ManagerController');
 });

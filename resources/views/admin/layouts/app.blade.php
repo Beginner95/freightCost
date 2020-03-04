@@ -48,6 +48,13 @@
 
                         @else
                             <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Менеджер</a>
+                                <div class="dropdown-menu dropdown-menu-left">
+                                    <a href="{{ route('admin.manager.index') }}" class="dropdown-item">Список менеджеров</a>
+                                    <a href="{{ route('admin.manager.create') }}" class="dropdown-item">Добавить менеджера</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Маршрут</a>
                                 <div class="dropdown-menu dropdown-menu-left">
                                     <a href="{{ route('admin.route.index') }}" class="dropdown-item">Список маршрутов</a>
