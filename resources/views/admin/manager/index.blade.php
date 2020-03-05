@@ -22,8 +22,8 @@
                                 <thead class="thead-light">
                                 <tr>
                                     <th scope="col">№</th>
-                                    <th scope="col">Грузоподъемность</th>
-                                    <th scope="col">Габарит</th>
+                                    <th scope="col">Менеджер</th>
+                                    <th scope="col">Логин</th>
                                     <th scope="col">Действие</th>
                                 </tr>
                                 </thead>
