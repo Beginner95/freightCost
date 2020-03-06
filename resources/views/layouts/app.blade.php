@@ -12,7 +12,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/main.js') }}" defer></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('YOUR_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,5 +22,6 @@
 </head>
 <body>
      @yield('content')
+     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('YOUR_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
 </body>
 </html>

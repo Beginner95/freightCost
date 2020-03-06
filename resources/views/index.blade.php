@@ -7,6 +7,7 @@
     </div>
     <div class="clear-input" id="clear-input-a"></div>
     <div class="clear-input" id="clear-input-b"></div>
+    <a href="{{ route('logout') }}" class="logout-icon"></a>
     <div class="weight">
         <ul class="panel_list d-flex block-weight"></ul>
         <div class="block-inform">
