@@ -1,4 +1,5 @@
 .idea/
+/public/assets
 /public/css
 /public/js
 /node_modules
