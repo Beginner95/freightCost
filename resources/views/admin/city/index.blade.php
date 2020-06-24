@@ -16,6 +16,7 @@
                                     <th scope="col">№</th>
                                     <th scope="col">Код города</th>
                                     <th scope="col">Наименование города</th>
+                                    <th scope="col">Долготоа / Широта</th>
                                     <th scope="col">Действие</th>
                                 </tr>
                                 </thead>
@@ -26,6 +27,10 @@
                                         <td width="30" scope="row">{{ $i++ }}</td>
                                         <td width="150">{{ $city->region_id }}</td>
                                         <td>{{ $city->name }}</td>
+                                        <td>
+                                            {{ json_decode($city->location, true)['lat'] }} /
+                                            {{ json_decode($city->location, true)['lng'] }}
+                                        </td>
                                         <td width="150">
                                             <a href="{{ route('admin.city.edit', $city->id) }}" class="btn btn-success">Edit</a>
                                             {{ Form::open(['route' => ['admin.city.destroy', $city->id], 'style' => 'float:right;']) }}
