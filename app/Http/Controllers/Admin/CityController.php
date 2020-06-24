@@ -44,6 +44,10 @@ class CityController extends Controller
         $city = new City();
         $city->name = $cityName;
         $city->region_id = $regionId;
+        $location = $this->getLocation($cityName);
+
+        if ($this->isJson($location)) $city->location = $location;
+
         $city->save();
         return redirect('/admin/city');
     }
@@ -83,7 +87,13 @@ class CityController extends Controller
         $cityName = $request['city'];
         $regionId = $request['region-id'];
         if (empty($cityName) || empty($regionId)) return back();
-        City::where('id', $id)->update(['region_id' => $regionId, 'name' => $cityName]);
+        $location = $this->getLocation($cityName);
+
+        City::where('id', $id)->update([
+            'region_id' => $regionId,
+            'name' => $cityName,
+            'location' => ($this->isJson($location)) ? $location : null
+        ]);
         return redirect('admin/city');
     }
 
@@ -98,5 +108,18 @@ class CityController extends Controller
         $city = City::where('id', $id)->first();
         $city->delete();
         return back();
+    }
+
+    public function getLocation($city)
+    {
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $city . '&key=' . env('YOUR_API_KEY');
+        $data = json_decode(file_get_contents($url), true);
+        return json_encode($data['results'][0]['geometry']['location']);
+    }
+
+    protected function isJson($string)
+    {
+        json_decode($string);
+        return (json_last_error() === JSON_ERROR_NONE);
     }
 }
