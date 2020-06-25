@@ -42,6 +42,16 @@ class IndexController extends Controller
         return response()->json($data);
     }
 
+    public function getCitiesFrom()
+    {
+        $weights = Route::get();
+        $data = [];
+        foreach ($weights as $weight) {
+            $data[] = $weight->cityOrigin->toArray();
+        }
+        return response()->json($data);
+    }
+
     private function getRoute($origin_id, $destination_id)
     {
         return Route::where('origin_id', $origin_id)->where('destination_id', $destination_id)->first();

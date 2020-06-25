@@ -3,6 +3,7 @@ Auth::routes();
 
 Route::get('/', 'IndexController@index')->name('index');
 Route::put('/weights', 'IndexController@weights')->name('weights');
+Route::get('/get-cities-from', 'IndexController@getCitiesFrom')->name('get.cities.from');
 
 Route::get('/register', function () {
    return redirect('/admin/index');
