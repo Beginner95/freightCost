@@ -22,7 +22,6 @@ function AutocompleteDirectionsHandler(map) {
     const originInput = document.getElementById('origin-input');
     const destinationInput = document.getElementById('destination-input');
     const modeSelector = document.getElementById('mode-selector');
-
     const originAutocomplete = new google.maps.places.Autocomplete(originInput);
     // Specify just the place data fields that you need.
     originAutocomplete.setFields(['place_id']);
@@ -42,9 +41,7 @@ function AutocompleteDirectionsHandler(map) {
 AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
     const me = this;
     autocomplete.bindTo('bounds', this.map);
-
     autocomplete.addListener('place_changed', function() {
-
         const place = autocomplete.getPlace();
 
         if (!place.place_id) {
@@ -87,11 +84,7 @@ AutocompleteDirectionsHandler.prototype.route = function() {
                     'start_address': start_address,
                     'end_address': end_address
                 };
-
-                ajax('/weights', addresses, 'PUT').then((data) => {
-                    createBlockWeights(data);
-                });
-
+                ajax('/weights', addresses);
             } else {
                 window.alert('Directions request failed due to ' + status);
             }
@@ -132,24 +125,18 @@ function clearInput(e) {
     if (e.target.id === 'clear-input-b') qS('#destination-input').value = '';
 }
 
-async function ajax(url, data, method) {
-    let body = null;
-    if (method !== 'GET') body = JSON.stringify(data);
-
-    try {
-        const response = await fetch(url, {
-            method: method,
-            body: body,
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+function ajax(url, data) {
+    fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    }).then(data => data.text())
+        .then(data => {
+            createBlockWeights(data);
         });
-        const json = await response.json();
-        return JSON.stringify(json);
-    } catch (error) {
-        console.error('Ошибка:', error);
-    }
 }
 
 function createBlockWeights(data) {
@@ -164,8 +151,8 @@ function createBlockWeights(data) {
         for (let i in data) {
             let checked = '';
             if (i === '0') checked = 'checked';
-            html += `<li><label><input type="radio" name="w" value="${data[i].price}" data-price="" ${checked} class="visually_hidden">`;
-            html += `<span class="panel_name">${data[i].name} <br> ${data[i].cubic_meter}</span></label></li>`;
+            html += '<li><label><input type="radio" name="w" value="' + data[i].price + '" data-price="" ' + checked + ' class="visually_hidden">';
+            html += '<span class="panel_name">' + data[i].name + ' <br> ' + data[i].cubic_meter + '</span></label></li>';
         }
         block.innerHTML = html;
         let check_price = qS('input[name="w"]:checked');
