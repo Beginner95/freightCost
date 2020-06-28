@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\City;
+use App\Traits\Location;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CityController extends Controller
 {
+    use Location;
     /**
      * Display a listing of the resource.
      *
@@ -108,18 +110,5 @@ class CityController extends Controller
         $city = City::where('id', $id)->first();
         $city->delete();
         return back();
-    }
-
-    public function getLocation($city)
-    {
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $city . '&key=' . env('YOUR_API_KEY');
-        $data = json_decode(file_get_contents($url), true);
-        return json_encode($data['results'][0]['geometry']['location']);
-    }
-
-    protected function isJson($string)
-    {
-        json_decode($string);
-        return (json_last_error() === JSON_ERROR_NONE);
     }
 }
