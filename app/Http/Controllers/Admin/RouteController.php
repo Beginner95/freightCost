@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\City;
 use App\Route;
+use App\Traits\Location;
 use App\Weight;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class RouteController extends Controller
 {
+    use Location;
     /**
      * Display a listing of the resource.
      *
@@ -164,11 +166,21 @@ class RouteController extends Controller
     private function getCityId($city)
     {
         $cityName = explode(',', $city)[0];
-        $city = City::select('id')->where('name', $cityName)->first();
+        $city = City::select('id', 'location')
+            ->where('name', $cityName)
+            ->first();
+
+        if ($city->location === null) {
+            $location = $this->getLocation($cityName);
+            City::where('name', $cityName)->update(['location' => $location]);
+        }
+
         if (empty($city)) {
             $city = new City();
             $city->name = $cityName;
             $city->region_id = 0;
+            $location = $this->getLocation($cityName);
+            if ($this->isJson($location)) $city->location = $location;
             $city->save();
             return $city->id;
         }
