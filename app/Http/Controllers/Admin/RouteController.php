@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\City;
 use App\Route;
 use App\Traits\Location;
+use App\Traits\TraitCity;
 use App\Weight;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class RouteController extends Controller
 {
-    use Location;
+    use Location, TraitCity;
     /**
      * Display a listing of the resource.
      *
@@ -161,29 +162,5 @@ class RouteController extends Controller
     private function getWeights()
     {
         return Weight::get();
-    }
-
-    private function getCityId($city)
-    {
-        $cityName = explode(',', $city)[0];
-        $city = City::select('id', 'location')
-            ->where('name', $cityName)
-            ->first();
-
-        if ($city->location === null) {
-            $location = $this->getLocation($cityName);
-            City::where('name', $cityName)->update(['location' => $location]);
-        }
-
-        if (empty($city)) {
-            $city = new City();
-            $city->name = $cityName;
-            $city->region_id = 0;
-            $location = $this->getLocation($cityName);
-            if ($this->isJson($location)) $city->location = $location;
-            $city->save();
-            return $city->id;
-        }
-        return $city->id;
     }
 }
