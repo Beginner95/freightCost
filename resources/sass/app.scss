@@ -58,8 +58,8 @@ html, body {
 .weight {
   z-index: 8;
   position: absolute;
-  top: 50px;
-  left: 12px;
+  top: 110px;
+  left: 20px;
   min-height: 72px;
   background: $white;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
@@ -126,7 +126,11 @@ html, body {
 }
 
 .block-inform {
-  padding: 0 20px;
+  padding: 20px;
+}
+
+.block-inform-p {
+  padding: 5px 0;
 }
 
 .add-weight {
@@ -153,11 +157,10 @@ html, body {
   background: url('/img/logout.svg') center center no-repeat;
   position: absolute;
   cursor: pointer;
-  right: 8px;
+  right: 60px;
   padding-top: 0;
   z-index: 999;
   top: 14px;
-  left: 430px;
 }
 
 #clear-input-a {
