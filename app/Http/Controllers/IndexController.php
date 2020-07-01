@@ -87,4 +87,24 @@ class IndexController extends Controller
         }
         return response()->json($cites);
     }
+
+    public function InfoWinLineData(Request $request)
+    {
+        $cityFrom = $request->ns1;
+        $cityTo = $request->ns2;
+
+        $cityFromId = $this->getCityId($cityFrom);
+        $cityToId = $this->getCityId($cityTo);
+
+        $route = Route::where([
+            ['origin_id', $cityFromId],
+            ['destination_id', $cityToId]
+        ])->first();
+
+        if ($route === null) return response()->json('Empty city');
+
+        $weights['weights'] =  $route->weights;
+
+        return response()->json($weights);
+    }
 }
