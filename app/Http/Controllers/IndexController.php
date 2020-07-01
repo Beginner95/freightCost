@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\Route;
+use App\Traits\TraitCity;
 use App\Weight;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
+    use TraitCity;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -62,5 +65,26 @@ class IndexController extends Controller
         $city = City::select('id')->where('name', $city)->first();
         if (empty($city)) return null;
         return $city->id;
+    }
+
+    public function getCitiesTo(Request $request)
+    {
+        $city_id = $request->id ?? $this->getCityId($request->n3);
+        $routes = Route::where('origin_id', $city_id)->get();
+        $cites = [];
+
+        foreach ($routes as $route) {
+            $cites[] = [
+                'id' => $route->id,
+                'active1' => true,
+                'status' => 1,
+                'name' => $route->cityDestination->name,
+                'lat' => json_decode($route->cityDestination->location, true)['lat'],
+                'len1' => intval($route->weights->toArray()[0]['pivot']['distance']),
+                'price_nal' => intval($route->weights->toArray()[0]['pivot']['price']),
+                'lon' => json_decode($route->cityDestination->location, true)['lng'],
+            ];
+        }
+        return response()->json($cites);
     }
 }
