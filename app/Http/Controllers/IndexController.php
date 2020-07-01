@@ -107,4 +107,16 @@ class IndexController extends Controller
 
         return response()->json($weights);
     }
+
+    public function cityCheck(Request $request)
+    {
+        $data = [
+            'l1' => floatval($request->l1),
+            'l2' => floatval($request->l2),
+            'n1' => $request->n1,
+            'n2' => 0,
+            'n3' => explode(',', $request->n1)[0]
+        ];
+        return response()->json($data);
+    }
 }
