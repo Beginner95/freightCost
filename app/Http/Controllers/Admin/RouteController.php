@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\City;
 use App\Route;
-use App\Traits\Location;
 use App\Traits\TraitCity;
 use App\Weight;
 use Illuminate\Http\Request;
@@ -12,7 +11,7 @@ use App\Http\Controllers\Controller;
 
 class RouteController extends Controller
 {
-    use Location, TraitCity;
+    use TraitCity;
     /**
      * Display a listing of the resource.
      *
