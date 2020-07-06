@@ -6,6 +6,7 @@ trait Location
 {
     public function getLocation($city)
     {
+        $city = strtr($city, [' ' => '%20']);
         $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $city . '&key=' . env('YOUR_API_KEY');
         $data = json_decode(file_get_contents($url), true);
         return json_encode($data['results'][0]['geometry']['location']);
